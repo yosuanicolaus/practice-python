@@ -12,18 +12,17 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        a = 0
-        b = 1
-        highest_profit = 0
+        a, b = 0, 1
+        highest = 0
         while b < len(prices):
             curr_profit = prices[b] - prices[a]
             if curr_profit > 0:
-                highest_profit = max(highest_profit, curr_profit)
+                highest = max(highest, curr_profit)
             else:
                 a = b
             b += 1
 
-        return highest_profit
+        return highest
 
 
 def main():
