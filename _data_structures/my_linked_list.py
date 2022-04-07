@@ -1,6 +1,3 @@
-from tkinter import N
-
-
 class ListNode:
     def __init__(self, data=0, prev=None, next=None) -> None:
         self.data = data
