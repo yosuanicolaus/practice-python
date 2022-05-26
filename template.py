@@ -4,6 +4,10 @@ import sys
 from io import BytesIO, IOBase
 
 
+def solve():
+    pass
+
+
 def main():
     pass
 
