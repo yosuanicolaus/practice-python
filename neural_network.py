@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -51,6 +52,10 @@ class Level:
             for i in range(len(self.inputs)):
                 sum += self.weights[i][o] * self.inputs[i]
 
+            if o == len(self.outputs) - 1:
+                self.outputs[o] = sigmoid(sum + self.biases[o])
+                continue
+
             if sum > self.biases[o]:
                 self.outputs[o] = 1
             else:
@@ -84,6 +89,10 @@ class Level:
 
 def randgenerate():
     return random.random() * 2 - 1
+
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
 
 
 def lerp(a, b, t):
