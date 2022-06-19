@@ -30,16 +30,17 @@ class NeuralNetwork:
 
 class Level:
     def __init__(self, input_count: int, output_count: int) -> None:
-        self.inputs = [None] * input_count
-        self.outputs = [None] * output_count
-        self.biases = [None] * output_count
-        self.weights = [[None] * output_count] * input_count
+        self.inputs = [None for _ in range(input_count)]
+        self.outputs = [None for _ in range(output_count)]
+        self.biases = [None for _ in range(output_count)]
+        self.weights = [[None for _ in range(
+            output_count)] for _ in range(input_count)]
 
         for i in range(input_count):
             for o in range(output_count):
                 if i == 0:
-                    self.biases[o] = random.random() * 2 - 1
-                self.weights[i][o] = random.random() * 2 - 1
+                    self.biases[o] = randgenerate()
+                self.weights[i][o] = randgenerate()
 
     def feed_forward(self, new_inputs: list[float]) -> list[float]:
         for i in range(len(self.inputs)):
@@ -63,13 +64,13 @@ class Level:
                 if i == 0:
                     self.biases[o] = lerp(
                         self.biases[o],
-                        random.random() * 2 - 1,
+                        randgenerate(),
                         mutate_power
                     )
 
                 self.weights[i][o] = lerp(
                     self.weights[i][o],
-                    random.random() * 2 - 1,
+                    randgenerate(),
                     mutate_power
                 )
 
@@ -79,6 +80,10 @@ class Level:
         print(level.biases)
         print("WEIGHTS")
         print(level.weights)
+
+
+def randgenerate():
+    return random.random() * 2 - 1
 
 
 def lerp(a, b, t):
