@@ -1,4 +1,5 @@
-from neural_network import NeuralNetwork as nn
+from machine_learning.neural_network import NeuralNetwork as nn
+import random
 
 
 def create_population(population_size: int, neuron_counts: list[int]) -> list[nn]:
@@ -25,9 +26,13 @@ def fitness(nn: nn, show_values: bool = False) -> float:
     return score
 
 
+# def select_pool
+
+
 def main():
     structure = [2, 3, 1]
-    pop_size = 100
+    pop_size = 250
+    mutate_power = 0.1
 
     population = create_population(pop_size, structure)
     best_score = 0
@@ -45,9 +50,15 @@ def main():
             if i == 0:
                 population[i] = best_nn
             else:
-                pass
+                population[i] = best_nn.copy()
+                population[i].mutate(mutate_power)
 
         print("GEN:", gen)
+        print("BEST SCORE:", best_score)
+        gen += 1
+
+    print("BEST NN:", best_nn)
+    fitness(best_nn, True)
 
 
 if __name__ == "__main__":

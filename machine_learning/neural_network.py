@@ -5,6 +5,7 @@ import random
 class NeuralNetwork:
     def __init__(self, neuron_counts: list[int]) -> None:
         self.levels = [None] * (len(neuron_counts) - 1)
+        self.structure = neuron_counts
         for i in range(len(self.levels)):
             self.levels[i] = Level(neuron_counts[i], neuron_counts[i + 1])
 
@@ -19,6 +20,12 @@ class NeuralNetwork:
     def mutate(self, mutate_power: float) -> None:
         for level in self.levels:
             level.mutate(mutate_power)
+
+    def copy(self):
+        new_nn = NeuralNetwork(self.structure)
+        for i in range(len(self.levels)):
+            new_nn.levels[i] = self.levels[i].copy()
+        return new_nn
 
     @staticmethod
     def print_values(nn):
@@ -78,6 +85,15 @@ class Level:
                     randgenerate(),
                     mutate_power
                 )
+
+    def copy(self):
+        new_level = Level(len(self.inputs), len(self.outputs))
+        for i in range(len(self.inputs)):
+            for o in range(len(self.outputs)):
+                if i == 0:
+                    new_level.biases[o] = self.biases[o]
+                new_level.weights[i][o] = self.weights[i][o]
+        return new_level
 
     @staticmethod
     def print_values(level):
