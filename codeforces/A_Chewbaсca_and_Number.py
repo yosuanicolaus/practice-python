@@ -4,57 +4,21 @@ import sys
 from io import BytesIO, IOBase
 
 
-# doesn't work (error) ... need DP?
-
-
-def dp(tasks: list[int], server_count: int, server_carry: int):
-    if tasks == []:
-        return server_count
-
-    if server_carry < tasks[-1]:
-        server_count += 1
-    else:
-        server_carry -= tasks[-1]
-
-    return min(
-        dp(tasks[:i] + tasks[i + 1 :], server_count, server_carry)
-        for i in range(len(tasks) - 1)
-    )
-
-
-def solve(tasks: list[int], time: int):
-    tasks.sort()
-    if tasks[-1] > time:
-        return -1
-
-    handled = [False] * len(tasks)
-    server_count = 0
-    server_carry = 0
-
-    return dp(tasks, server_count, server_carry)
-
-    # for i in range(len(tasks) - 1, -1, -1):
-    #     if handled[i]:
-    #         continue
-
-    #     server_count += 1
-    #     handled[i] = True
-    #     server_carry = time - tasks[i]
-
-    #     # j = i - 1
-    #     # while server_carry > 0 and j >= 0:
-    #     #     if tasks[j] <= server_carry:
-    #     #         server_carry -= tasks[j]
-    #     #         handled[j] = True
-    #     #     j -= 1
-
-    # return server_count
+def solve():
+    pass
 
 
 def main():
-    _, time = map(int, input().split())
-    tasks = list(map(int, input().split()))
-    print(solve(tasks, time))
+    digits = list(input())
+    for i, digit in enumerate(digits):
+        if digit in "56789":
+            inverted = str(9 - int(digit))
+            digits[i] = inverted
+
+    if len(digits) > 0 and digits[0] == "0":
+        digits[0] = "9"
+
+    print("".join(digits))
 
 
 # region fastio
