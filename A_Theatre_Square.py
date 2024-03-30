@@ -1,30 +1,24 @@
 #!/usr/bin/env python
-from math import ceil
 import os
 import sys
 from io import BytesIO, IOBase
 
+from math import ceil
 
-def solve(n, m, a):
-    h, v = 0, 0
-    if n % a == 0:
-        h = n // a
-    else:
-        h = ceil(n / a)
-    if m % a == 0:
-        v = m // a
-    else:
-        v = ceil(m / a)
-    return h + v
+
+def solve():
+    pass
 
 
 def main():
     n, m, a = map(int, input().split())
-    ans = solve(n, m, a)
-    print(ans)
+    need_n = ceil(n / a)
+    need_m = ceil(m / a)
+    print(need_n * need_m)
 
 
 # region fastio
+
 BUFSIZE = 8192
 
 
@@ -74,10 +68,13 @@ class IOWrapper(IOBase):
 
 
 sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
-def input(): return sys.stdin.readline().rstrip("\r\n")
+
+
+def input():
+    return sys.stdin.readline().rstrip("\r\n")
+
 
 # endregion
-
 
 if __name__ == "__main__":
     main()
